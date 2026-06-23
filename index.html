@@ -1396,17 +1396,15 @@ function renderHisto(prefix) {
   const nom = currentUser;
   const mois = histoMois[prefix];
   const y = mois.getFullYear(), m = mois.getMonth();
-
-  // Label mois
-  document.getElementById(prefix+'-histo-month-label').textContent = MONTHS_FR_FULL[m] + ' ' + y;
-
-  // Type de données
   const cat = prefix === 't' ? 'transport' : prefix === 'd' ? 'depannage' : 'atelier';
 
-  // Récupérer les pointages du mois pour ce salarié
-  const entries = filterByMonth(loadPointages(cat), mois).filter(e => e.nom === nom);
-  const entryMap = {};
-  entries.forEach(e => { entryMap[e.date] = e; });
+  document.getElementById(prefix+'-histo-month-label').textContent = MONTHS_FR_FULL[m] + ' ' + y;
+  document.getElementById(prefix+'-histo-list').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">Chargement...</div>';
+
+  const doRender = () => {
+    const entries = filterByMonth(loadPointages(cat), mois).filter(e => e.nom === nom);
+    const entryMap = {};
+    entries.forEach(e => { entryMap[e.date] = e; });
 
   // Récupérer les congés du mois
   const congesEntries = dbCache.conges.filter(e => e.nom === nom && e.dates &&
@@ -1498,6 +1496,21 @@ function renderHisto(prefix) {
   }
 
   document.getElementById(prefix+'-histo-list').innerHTML = rows;
+  }; // fin doRender
+
+  // Recharger depuis Firestore puis afficher
+  if (window.__db) {
+    const col = cat === 'atelier' ? 'pointages_atelier' : 'pointages_' + cat;
+    window.__db.collection(col).where('nom','==',nom).get()
+      .then(snap => {
+        dbCache[cat] = dbCache[cat].filter(e => e.nom !== nom);
+        snap.forEach(d => dbCache[cat].push(d.data()));
+        doRender();
+      })
+      .catch(() => doRender());
+  } else {
+    doRender();
+  }
 }
 
 /* ══════════════════════════════════════════════════════════
