@@ -1073,7 +1073,34 @@ function enterTransport(nom) {
   document.getElementById('t-topbar-date').textContent = today.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'});
   updateDateLabel();
   showScreen('screen-transport');
-  calcT();
+
+  // Recharger les données Firestore pour ce salarié
+  if (window.__db) {
+    window.__db.collection('pointages_transport').where('nom','==',nom).get().then(snap => {
+      dbCache.transport = dbCache.transport.filter(e => e.nom !== nom);
+      snap.forEach(d => dbCache.transport.push(d.data()));
+      // Pré-remplir si pointage du jour existe
+      const todayStr = today.toISOString().split('T')[0];
+      const existing = dbCache.transport.find(e => e.nom===nom && e.date===todayStr);
+      if (existing) prefillTransport(existing);
+      else calcT();
+    }).catch(e => calcT());
+  } else calcT();
+}
+
+function prefillTransport(e) {
+  if (e.isRepos) {
+    document.getElementById('t-repos').checked = true;
+    document.getElementById('t-repos-alert').style.display = 'block';
+    document.getElementById('t-work-section').style.display = 'none';
+  } else {
+    if (e.depart) document.getElementById('t-dep').value = e.depart;
+    if (e.pauseDebut) document.getElementById('t-pd').value = e.pauseDebut;
+    if (e.pauseFin) document.getElementById('t-pf').value = e.pauseFin;
+    if (e.fin) document.getElementById('t-fin').value = e.fin;
+    if (e.decouche) { document.getElementById('t-decouche').checked = true; document.getElementById('t-decouche-alert').style.display='flex'; }
+    calcT();
+  }
 }
 function enterDepannage(nom) {
   const today = new Date();
@@ -1096,7 +1123,36 @@ function enterDepannage(nom) {
   dimInterventions=0;
   checkDimanche();
   showScreen('screen-depannage');
-  calcD();
+
+  // Recharger les données Firestore pour ce salarié
+  if (window.__db) {
+    window.__db.collection('pointages_depannage').where('nom','==',nom).get().then(snap => {
+      dbCache.depannage = dbCache.depannage.filter(e => e.nom !== nom);
+      snap.forEach(d => dbCache.depannage.push(d.data()));
+      const todayStr = today.toISOString().split('T')[0];
+      const existing = dbCache.depannage.find(e => e.nom===nom && e.date===todayStr);
+      if (existing) prefillDepannage(existing);
+      else calcD();
+    }).catch(e => calcD());
+  } else calcD();
+}
+
+function prefillDepannage(e) {
+  if (e.isRepos) {
+    document.getElementById('d-repos').checked = true;
+    document.getElementById('d-repos-alert').style.display = 'block';
+    document.getElementById('d-work-section').style.display = 'none';
+  } else {
+    if (e.depart) document.getElementById('d-dep').value = e.depart;
+    if (e.pauseDebut) document.getElementById('d-pd').value = e.pauseDebut;
+    if (e.pauseFin) document.getElementById('d-pf').value = e.pauseFin;
+    if (e.fin) document.getElementById('d-fin').value = e.fin;
+    if (e.panier) { document.getElementById('d-panier').checked = true; document.getElementById('d-panier-alert').style.display='flex'; }
+    if (e.horsHorairesAvant) { hhCounts.avant = e.horsHorairesAvant; document.getElementById('d-hh-avant').textContent = e.horsHorairesAvant; }
+    if (e.horsHorairesPause) { hhCounts.pause = e.horsHorairesPause; document.getElementById('d-hh-pause').textContent = e.horsHorairesPause; }
+    if (e.horsHorairesApres) { hhCounts.apres = e.horsHorairesApres; document.getElementById('d-hh-apres').textContent = e.horsHorairesApres; }
+    calcD();
+  }
 }
 function togglePanierD(){const cb=document.getElementById('d-panier');document.getElementById('d-panier-alert').style.display=cb.checked?'flex':'none';}
 function toggleRepos(){
@@ -2468,6 +2524,30 @@ function enterAtelier(nom) {
   document.getElementById('a-conge-alert').style.display = 'none';
   document.getElementById('a-work-section').style.display = 'block';
   showScreen('screen-atelier');
+
+  // Recharger les données Firestore pour ce salarié
+  if (window.__db) {
+    window.__db.collection('pointages_atelier').where('nom','==',nom).get().then(snap => {
+      dbCache.atelier = dbCache.atelier.filter(e => e.nom !== nom);
+      snap.forEach(d => dbCache.atelier.push(d.data()));
+      const todayStr = today.toISOString().split('T')[0];
+      const existing = dbCache.atelier.find(e => e.nom===nom && e.date===todayStr);
+      if (existing) prefillAtelier(existing);
+    }).catch(e => {});
+  }
+}
+
+function prefillAtelier(e) {
+  if (e.conge) {
+    document.getElementById('a-conge').checked = true;
+    document.getElementById('a-conge-alert').style.display = 'block';
+    document.getElementById('a-work-section').style.display = 'none';
+  } else {
+    if (e.dep) document.getElementById('a-dep').value = e.dep;
+    if (e.pd)  document.getElementById('a-pd').value  = e.pd;
+    if (e.pf)  document.getElementById('a-pf').value  = e.pf;
+    if (e.fin) document.getElementById('a-fin').value = e.fin;
+  }
 }
 
 function toggleCongeA() {
