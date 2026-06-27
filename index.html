@@ -956,14 +956,12 @@ function restoreDepannageEntry(e, isOff){
 const dbCache={transport:[],depannage:[],atelier:[],conges:[]};
 function loadPointages(type){return dbCache[type]||[];}
 function savePointage(type,entry){
-  // Mettre à jour le cache local
   const all=dbCache[type]||[];
   const idx=all.findIndex(e=>e.nom===entry.nom&&e.date===entry.date);
   if(idx>=0)all[idx]=entry;else all.push(entry);
-  // ID fixe basé sur nom+date pour éviter les doublons
   if(window.__db){
-    const docId=(entry.nom+'_'+entry.date).replace(/[^a-zA-Z0-9_]/g,'_');
     const col=type==='atelier'?'pointages_atelier':'pointages_'+type;
+    const docId=(entry.nom+'_'+entry.date).replace(/[^a-zA-Z0-9_]/g,'_');
     window.__db.collection(col).doc(docId)
       .set(Object.assign({},entry))
       .catch(e=>console.error('Firestore save error:',e));
@@ -973,14 +971,15 @@ function reloadGestionnaire(){
   const loading=document.getElementById('g-loading');
   if(loading)loading.style.display='flex';
   if(!window.__db){renderGLists();if(loading)loading.style.display='none';return;}
-  const safeGet = (ref) => ref.get().catch(() => ({docs:[]}));
+  const safeGet=ref=>ref.get().catch(()=>({docs:[]}));
+  const safeGetDoc=ref=>ref.get().catch(()=>({exists:false}));
   Promise.all([
     safeGet(window.__db.collection('pointages_transport')),
     safeGet(window.__db.collection('pointages_depannage')),
     safeGet(window.__db.collection('pointages_atelier')),
     safeGet(window.__db.collection('conges')),
-    window.__db.collection('config').doc('horaires').get().catch(()=>({exists:false})),
-    window.__db.collection('config').doc('salaries').get().catch(()=>({exists:false}))
+    safeGetDoc(window.__db.collection('config').doc('horaires')),
+    safeGetDoc(window.__db.collection('config').doc('salaries'))
   ]).then(([tS,dS,aS,cS,hDoc,salDoc])=>{
     dbCache.transport=tS.docs.map(d=>d.data());
     dbCache.depannage=dS.docs.map(d=>d.data());
@@ -2685,10 +2684,10 @@ function saveA() {
   };
   firebase.initializeApp(firebaseConfig);
   window.__db = firebase.firestore();
-  // Charger la config salariés au démarrage
+  // Charger la config salariés au démarrage pour mettre à jour la liste de connexion
   window.__db.collection('config').doc('salaries').get()
     .then(doc=>{ if(doc.exists) applyEmployeConfig(doc.data()); })
-    .catch(e=>{ console.warn('Config salaries non disponible:', e.message); });
+    .catch(e=>console.warn('Init salaries non disponible:', e.message));
 </script>
 
 <!-- ATELIER SCREEN -->
