@@ -988,9 +988,16 @@ function enterTransport(nom) {
     ? 'Référence : Vendredi 8h–12h / 14h–17h (= 7h/jour)'
     : 'Référence : Lun–Jeu 8h–12h / 14h–18h (= 8h/jour)';
   document.getElementById('t-topbar-date').textContent = today.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'});
-  updateDateLabel();
   showScreen('screen-transport');
-  calcT();
+  if (window.__db) {
+    window.__db.collection('pointages_transport').where('nom','==',nom).get()
+      .then(snap => {
+        dbCache.transport = dbCache.transport.filter(e => e.nom !== nom);
+        snap.forEach(d => dbCache.transport.push(d.data()));
+        updateDateLabel();
+        calcT();
+      }).catch(() => { updateDateLabel(); calcT(); });
+  } else { updateDateLabel(); calcT(); }
 }
 function enterDepannage(nom) {
   const today = new Date();
@@ -1009,7 +1016,14 @@ function enterDepannage(nom) {
   dimInterventions=0;
   checkDimanche();
   showScreen('screen-depannage');
-  calcD();
+  if (window.__db) {
+    window.__db.collection('pointages_depannage').where('nom','==',nom).get()
+      .then(snap => {
+        dbCache.depannage = dbCache.depannage.filter(e => e.nom !== nom);
+        snap.forEach(d => dbCache.depannage.push(d.data()));
+        checkDimanche();
+      }).catch(() => {});
+  }
 }
 function togglePanierD(){const cb=document.getElementById('d-panier');document.getElementById('d-panier-alert').style.display=cb.checked?'flex':'none';}
 function toggleRepos(){
