@@ -261,6 +261,9 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'SF Pro
           <option value="Desmet Alain|atelier">🔨 Desmet Alain</option>
           <option value="Verheecke Anthony|atelier">🔨 Verheecke Anthony</option>
           
+          <!-- BUREAU -->
+          <option value="Gosciniak Laura|bureau">💼 Gosciniak Laura</option>
+          <option value="Dautrey Audray|bureau">💼 Dautrey Audray</option>
         </select>
         <label>Code PIN</label>
         <input type="password" id="login-pin" placeholder="• • • •" maxlength="4" inputmode="numeric" onkeypress="if(event.key==='Enter')doLogin()">
@@ -289,7 +292,6 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'SF Pro
   </div>
   <div class="scroll-area" id="t-scroll">
 
-    <div id="t-page-pointage">
     <div class="section-title">Mon pointage</div>
     <div class="section-sub" id="t-ref-horaire">Lun–Jeu 8h–12h / 14h–18h</div>
 
@@ -409,25 +411,7 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'SF Pro
       Enregistrer ma journée
     </button>
     <div id="t-saved" class="alert alert-success" style="display:none;">✅ Journée enregistrée !</div>
-    </div><!-- /t-page-pointage -->
 
-    <!-- PAGE HISTORIQUE TRANSPORT -->
-    <div id="t-page-historique" style="display:none;">
-      <div class="section-title">Mon historique</div>
-      <div class="section-sub">Récapitulatif de mes temps de travail</div>
-      <div class="month-nav" style="margin-bottom:12px;">
-        <button class="month-nav-btn" onclick="changeHistoMois('t',-1)">‹</button>
-        <span id="t-histo-month-label" style="font-weight:600;font-size:15px;"></span>
-        <button class="month-nav-btn" onclick="changeHistoMois('t',1)">›</button>
-      </div>
-      <div class="stat-grid">
-        <div class="stat-card"><div class="stat-val" id="t-histo-jours">—</div><div class="stat-lbl">Jours travaillés</div></div>
-        <div class="stat-card accent"><div class="stat-val" id="t-histo-heures">—</div><div class="stat-lbl">Heures totales</div></div>
-        <div class="stat-card"><div class="stat-val" id="t-histo-supp">—</div><div class="stat-lbl">Heures supp.</div></div>
-        <div class="stat-card" style="background:#d97706;"><div class="stat-val" id="t-histo-conges">—</div><div class="stat-lbl">Jours congés</div></div>
-      </div>
-      <div class="card"><div class="card-header">📋 Détail jour par jour</div><div id="t-histo-list"></div></div>
-    </div>
   </div>
   <div class="bottom-nav">
     <button class="nav-item active" onclick="tNav('pointage',this)">
@@ -437,10 +421,6 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'SF Pro
     <button class="nav-item" onclick="tNav('historique',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
       <span>Historique</span>
-    </button>
-    <button class="nav-item" onclick="enterConge(currentUser)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span>Congés</span>
     </button>
     <button class="nav-item" onclick="tNav('profil',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -460,7 +440,6 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'SF Pro
   </div>
   <div class="scroll-area" id="d-scroll">
 
-    <div id="d-page-pointage">
     <div class="section-title">Mon pointage</div>
     <div class="section-sub">Lun–Jeu 8h–12h / 14h–18h &nbsp;|&nbsp; Ven 8h–12h / 14h–17h</div>
 
@@ -613,25 +592,7 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'SF Pro
       Enregistrer ma journée
     </button>
     <div id="d-saved" class="alert alert-success" style="display:none;">✅ Journée enregistrée !</div>
-    </div><!-- /d-page-pointage -->
 
-    <!-- PAGE HISTORIQUE DÉPANNAGE -->
-    <div id="d-page-historique" style="display:none;">
-      <div class="section-title">Mon historique</div>
-      <div class="section-sub">Récapitulatif de mes temps de travail</div>
-      <div class="month-nav" style="margin-bottom:12px;">
-        <button class="month-nav-btn" onclick="changeHistoMois('d',-1)">‹</button>
-        <span id="d-histo-month-label" style="font-weight:600;font-size:15px;"></span>
-        <button class="month-nav-btn" onclick="changeHistoMois('d',1)">›</button>
-      </div>
-      <div class="stat-grid">
-        <div class="stat-card"><div class="stat-val" id="d-histo-jours">—</div><div class="stat-lbl">Jours travaillés</div></div>
-        <div class="stat-card orange"><div class="stat-val" id="d-histo-heures">—</div><div class="stat-lbl">Heures totales</div></div>
-        <div class="stat-card green"><div class="stat-val" id="d-histo-inter">—</div><div class="stat-lbl">Interventions h.h.</div></div>
-        <div class="stat-card" style="background:#d97706;"><div class="stat-val" id="d-histo-conges">—</div><div class="stat-lbl">Jours congés</div></div>
-      </div>
-      <div class="card"><div class="card-header">📋 Détail jour par jour</div><div id="d-histo-list"></div></div>
-    </div>
   </div>
   <div class="bottom-nav" style="border-top-color: #fed7aa;">
     <button class="nav-item active" style="--accent: #f97316;" onclick="dNav('pointage',this)">
@@ -641,10 +602,6 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'SF Pro
     <button class="nav-item" onclick="dNav('historique',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
       <span>Historique</span>
-    </button>
-    <button class="nav-item" onclick="enterConge(currentUser)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span>Congés</span>
     </button>
     <button class="nav-item" onclick="dNav('profil',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -712,7 +669,6 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'SF Pro
     <div class="tabs">
       <div class="tab active" onclick="gTab('transport', this)">🚚 Transport</div>
       <div class="tab" onclick="gTab('depannage', this)">🔧 Dépannage</div>
-      <div class="tab" onclick="gTab('conges', this)">🏖️ Congés</div>
       <div class="tab" onclick="gTab('config', this)">⚙️ Config</div>
       <div class="tab" onclick="gTab('salaries', this)">👥 Salariés</div>
     </div>
@@ -746,17 +702,6 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'SF Pro
     </div>
 
     <!-- Config view -->
-    <!-- Congés view -->
-    <div id="g-conges-view" style="display:none; padding-top:4px;">
-      <div class="stat-grid">
-        <div class="stat-card"><div class="stat-val" id="g-c-total">0</div><div class="stat-lbl">Jours congés déclarés</div></div>
-        <div class="stat-card accent"><div class="stat-val" id="g-c-salaries">0</div><div class="stat-lbl">Salariés concernés</div></div>
-      </div>
-      <div class="card">
-        <div class="card-header">🏖️ Congés du mois — tous salariés</div>
-        <div id="g-c-list"></div>
-      </div>
-    </div>
     <div id="g-config-view" style="display:none; padding-top:4px;">
 
       <!-- Horaires de référence -->
@@ -829,12 +774,12 @@ html, body { height: 100%; overflow: hidden; font-family: -apple-system, 'SF Pro
 const VEHICLES = ['BZ-561-FH','DR-433-ZQ','EZ-202-ND','FP-770-PY','FS-666-TT','GB-091-VN','GC-274-BD','GL-662-ZR','GM-869-ER','GV-868-FZ','HC-368-NB','HE-074-XK','HF-291-HL','HH-125-NW','HH-430-FT','GE-961-PR','FK-722-DS','FB-114-JL','FR-899-CC'];
 
 // PINs globaux (mis à jour depuis Firestore config/salaries)
-window.GLOBAL_PINS = {"Cailliau Christophe":"2824","Platevoet Demitry":"1409","Fiolet Frédéric":"5506","Mahieux Robin":"5012","Thomas Florian":"4657","Millot Clément":"3286","Thomas Dimitri":"2679","Gardin Brandon":"9935","Wadoux Orient":"2424","Decroix Alexis":"7912","Demarthe Logan":"1520","Roy Guillaume":"1488","Bouchez Dylan":"2535","Davre Mickaël":"4582","Davre Michel":"4811","Souvignon Alexis":"9279","Grisel Nicolas":"1434","Vichery Vincent":"5734","Santune Matteo":"2613","Desmet Alain":"6673","Verheecke Anthony":"7708",};
+window.GLOBAL_PINS = {"Cailliau Christophe":"2824","Platevoet Demitry":"1409","Fiolet Frédéric":"5506","Mahieux Robin":"5012","Thomas Florian":"4657","Millot Clément":"3286","Thomas Dimitri":"2679","Gardin Brandon":"9935","Wadoux Orient":"2424","Decroix Alexis":"7912","Demarthe Logan":"1520","Roy Guillaume":"1488","Bouchez Dylan":"2535","Davre Mickaël":"4582","Davre Michel":"4811","Souvignon Alexis":"9279","Grisel Nicolas":"1434","Vichery Vincent":"5734","Santune Matteo":"2613","Desmet Alain":"6673","Verheecke Anthony":"7708","Gosciniak Laura":"2206","Dautrey Audray":"9412"};
 window.PANIER_DEP_EMPLOYEES = ['Demarthe Logan'];
 const TRANSPORT_NAMES = ['Cailliau Christophe','Platevoet Demitry','Fiolet Frédéric','Mahieux Robin','Thomas Florian','Millot Clément','Thomas Dimitri'];
 const DEPANNAGE_NAMES = ['Gardin Brandon','Wadoux Orient','Decroix Alexis','Demarthe Logan','Roy Guillaume','Bouchez Dylan','Davre Mickaël','Davre Michel','Souvignon Alexis','Grisel Nicolas','Vichery Vincent'];
 const ATELIER_NAMES = ['Santune Matteo','Desmet Alain','Verheecke Anthony'];
-const ALL_NAMES = [...TRANSPORT_NAMES, ...DEPANNAGE_NAMES, ...ATELIER_NAMES];
+const BUREAU_NAMES = ['Gosciniak Laura','Dautrey Audray'];
 // Horaires de référence individuels (minutes/jour, 0=dim … 6=sam)
 const HORAIRES_REF = {
   'Roy Guillaume':  {0:0,1:420,2:420,3:240,4:420,5:420,6:0},
@@ -932,17 +877,16 @@ function restoreDepannageEntry(e, isOff){
     calcD();
   }
 }
-const dbCache={transport:[],depannage:[],atelier:[],conges:[]};
+const dbCache={transport:[],depannage:[]};
 function loadPointages(type){return dbCache[type]||[];}
 function savePointage(type,entry){
-  const all=dbCache[type]||[];
+  const all=dbCache[type];
   const idx=all.findIndex(e=>e.nom===entry.nom&&e.date===entry.date);
   if(idx>=0)all[idx]=entry;else all.push(entry);
   if(window.__db){
-    const col=type==='atelier'?'pointages_atelier':'pointages_'+type;
-    const docId=(entry.nom+'_'+entry.date).replace(/[^a-zA-Z0-9_]/g,'_');
-    window.__db.collection(col).doc(docId)
-      .set(Object.assign({},entry))
+    window.__db.collection('pointages_'+type)
+      .where('nom','==',entry.nom).where('date','==',entry.date).get()
+      .then(q=>{q.forEach(d=>d.ref.delete());return window.__db.collection('pointages_'+type).add(Object.assign({},entry));})
       .catch(e=>console.error('Firestore save error:',e));
   }
 }
@@ -950,20 +894,14 @@ function reloadGestionnaire(){
   const loading=document.getElementById('g-loading');
   if(loading)loading.style.display='flex';
   if(!window.__db){renderGLists();if(loading)loading.style.display='none';return;}
-  const safeGet=ref=>ref.get().catch(()=>({docs:[]}));
-  const safeDoc=ref=>ref.get().catch(()=>({exists:false}));
   Promise.all([
-    safeGet(window.__db.collection('pointages_transport')),
-    safeGet(window.__db.collection('pointages_depannage')),
-    safeGet(window.__db.collection('pointages_atelier')),
-    safeGet(window.__db.collection('conges')),
-    safeDoc(window.__db.collection('config').doc('horaires')),
-    safeDoc(window.__db.collection('config').doc('salaries'))
-  ]).then(([tS,dS,aS,cS,hDoc,salDoc])=>{
+    window.__db.collection('pointages_transport').get(),
+    window.__db.collection('pointages_depannage').get(),
+    window.__db.collection('config').doc('horaires').get(),
+    window.__db.collection('config').doc('salaries').get()
+  ]).then(([tS,dS,hDoc,salDoc])=>{
     dbCache.transport=tS.docs.map(d=>d.data());
     dbCache.depannage=dS.docs.map(d=>d.data());
-    dbCache.atelier=aS.docs.map(d=>d.data());
-    dbCache.conges=cS.docs.map(d=>d.data());
     if(hDoc.exists){
       window.customHoraires=hDoc.data();
       Object.keys(window.customHoraires).forEach(nom=>{HORAIRES_REF[nom]=window.customHoraires[nom];});
@@ -973,7 +911,7 @@ function reloadGestionnaire(){
     } else {
       // Première connexion : sauvegarder la config par défaut
       const def=buildDefaultSalariesConfig();
-      window.__db.collection('config').doc('salaries').set(def).catch(e=>console.warn('Config non disponible:',e.message));
+      window.__db.collection('config').doc('salaries').set(def).catch(e=>console.error('Init salaries:',e));
     }
     renderGLists();
     if(loading)loading.style.display='none';
@@ -1009,8 +947,7 @@ function doLogin() {
   const [nom, type] = sel.split('|');
   currentUser = nom; currentRole = type;
   if (type === 'transport') enterTransport(nom);
-  else if (type === 'depannage') enterDepannage(nom);
-  else if (type === 'atelier') enterAtelier(nom);
+  else enterDepannage(nom);
 }
 
 /* ── SCREENS ── */
@@ -1617,195 +1554,10 @@ function gTab(tab, btn) {
   btn.classList.add('active');
   document.getElementById('g-transport-view').style.display = tab==='transport' ? 'block' : 'none';
   document.getElementById('g-depannage-view').style.display = tab==='depannage' ? 'block' : 'none';
-  document.getElementById('g-conges-view').style.display = tab==='conges' ? 'block' : 'none';
   document.getElementById('g-config-view').style.display = tab==='config' ? 'block' : 'none';
   document.getElementById('g-salaries-view').style.display = tab==='salaries' ? 'block' : 'none';
   if (tab==='config') initConfigTab();
   if (tab==='salaries') initSalariesTab();
-  if (tab==='conges') renderCongesAdmin();
-}
-
-// ════ HISTORIQUE SALARIÉ ════
-const histoMois = { t: new Date(), d: new Date(), a: new Date() };
-const MONTHS_FR_FULL = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-const DAYS_FR_SHORT = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
-
-function tNav(page, btn) {
-  document.querySelectorAll('#screen-transport .nav-item').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('t-page-pointage').style.display = page==='pointage' ? 'block' : 'none';
-  document.getElementById('t-page-historique').style.display = page==='historique' ? 'block' : 'none';
-  if (page==='historique') renderHisto('t');
-}
-function dNav(page, btn) {
-  document.querySelectorAll('#screen-depannage .nav-item').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('d-page-pointage').style.display = page==='pointage' ? 'block' : 'none';
-  document.getElementById('d-page-historique').style.display = page==='historique' ? 'block' : 'none';
-  if (page==='historique') renderHisto('d');
-}
-function aNav(page, btn) {
-  document.querySelectorAll('#screen-atelier .nav-item').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('a-page-pointage').style.display = page==='pointage' ? 'block' : 'none';
-  document.getElementById('a-page-historique').style.display = page==='historique' ? 'block' : 'none';
-  if (page==='historique') renderHisto('a');
-}
-function changeHistoMois(prefix, delta) {
-  histoMois[prefix].setMonth(histoMois[prefix].getMonth() + delta);
-  renderHisto(prefix);
-}
-function renderHisto(prefix) {
-  const nom = currentUser;
-  const mois = histoMois[prefix];
-  const y = mois.getFullYear(), m = mois.getMonth();
-  const cat = prefix==='t' ? 'transport' : prefix==='d' ? 'depannage' : 'atelier';
-  document.getElementById(prefix+'-histo-month-label').textContent = MONTHS_FR_FULL[m]+' '+y;
-  document.getElementById(prefix+'-histo-list').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-muted);">Chargement...</div>';
-  const col = cat==='atelier' ? 'pointages_atelier' : 'pointages_'+cat;
-  const doRender = () => {
-    const entries = filterByMonth(dbCache[cat]||[], mois).filter(e=>e.nom===nom);
-    const entryMap = {}; entries.forEach(e=>{entryMap[e.date]=e;});
-    const congesDates = new Set();
-    (dbCache.conges||[]).filter(e=>e.nom===nom&&e.dates).forEach(e=>e.dates.forEach(d=>{
-      const dd=new Date(d+'T12:00:00');
-      if(dd.getFullYear()===y&&dd.getMonth()===m) congesDates.add(d);
-    }));
-    const daysInMonth = new Date(y,m+1,0).getDate();
-    let totJours=0,totMins=0,totSupp=0,totInter=0; let rows='';
-    for(let d=1;d<=daysInMonth;d++){
-      const dateStr=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      const dow=new Date(dateStr+'T12:00:00').getDay();
-      const isWE=dow===0||dow===6;
-      const e=entryMap[dateStr]; const isConge=congesDates.has(dateStr);
-      if(isWE&&!e&&!isConge) continue;
-      let badge='';
-      if(isConge&&!e){
-        badge=`<span style="background:#fef3c7;color:#d97706;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;">🏖️ Congé</span>`;
-      } else if(e&&e.isRepos){
-        badge=`<span style="background:#f1f5f9;color:#64748b;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;">🛌 Repos</span>`;
-      } else if(e&&e.conge){
-        badge=`<span style="background:#fef3c7;color:#d97706;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:700;">🏖️ Congé</span>`;
-      } else if(e){
-        const mins=e.minutes||0; const supp=e.minutesSupp||0; const inter=(e.horsHorairesTotal||0)*60;
-        totJours++; totMins+=mins; totSupp+=supp; totInter+=inter;
-        const suppStr=supp>0?`<span style="color:#16a34a;font-size:11px;font-weight:700;"> +${fmtH(supp)}</span>`:'';
-        const interStr=inter>0?`<span style="color:#0369a1;font-size:11px;"> ·${fmtH(inter)} h.h.</span>`:'';
-        const extras=[]; if(e.panier)extras.push('🍽️'); if(e.decouche)extras.push('🌙');
-        badge=`<span style="font-size:15px;font-weight:700;color:var(--accent);">${fmtH(mins)}</span>${suppStr}${interStr}${extras.length?' <span>'+extras.join('')+'</span>':''}`;
-      } else if(!isWE){
-        badge=`<span style="color:#94a3b8;font-size:12px;font-style:italic;">—</span>`;
-      } else continue;
-      rows+=`<div style="display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);gap:10px;">
-        <div style="width:42px;text-align:center;flex-shrink:0;">
-          <div style="font-size:11px;color:var(--text-muted);font-weight:600;">${DAYS_FR_SHORT[dow]}</div>
-          <div style="font-size:18px;font-weight:700;color:${isWE?'#94a3b8':'var(--text)'};">${d}</div>
-        </div><div style="flex:1;">${badge}</div></div>`;
-    }
-    if(!rows) rows='<div style="text-align:center;color:var(--text-muted);padding:20px;font-size:14px;">Aucun pointage ce mois-ci</div>';
-    document.getElementById(prefix+'-histo-jours').textContent=totJours;
-    document.getElementById(prefix+'-histo-heures').textContent=fmtH(totMins);
-    document.getElementById(prefix+'-histo-conges').textContent=congesDates.size+'j';
-    if(prefix==='t') document.getElementById('t-histo-supp').textContent=totSupp>0?'+'+fmtH(totSupp):'0h';
-    else if(prefix==='d') document.getElementById('d-histo-inter').textContent=totInter>0?fmtH(totInter):'0h';
-    else if(prefix==='a') document.getElementById('a-histo-supp').textContent=totSupp>0?'+'+fmtH(totSupp):'0h';
-    document.getElementById(prefix+'-histo-list').innerHTML=rows;
-  };
-  if(window.__db){
-    window.__db.collection(col).where('nom','==',nom).get()
-      .then(snap=>{dbCache[cat]=(dbCache[cat]||[]).filter(e=>e.nom!==nom);snap.forEach(d=>dbCache[cat].push(d.data()));doRender();})
-      .catch(()=>doRender());
-  } else doRender();
-}
-
-// ════ CONGÉS ════
-function enterConge(nom) {
-  const today = new Date();
-  document.getElementById('c-topbar-name').textContent = nom;
-  document.getElementById('c-topbar-date').textContent = today.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
-  const todayStr = today.toISOString().split('T')[0];
-  document.getElementById('c-date-debut').value = todayStr;
-  document.getElementById('c-date-fin').value = todayStr;
-  document.getElementById('c-motif').value = '';
-  document.getElementById('c-saved').style.display = 'none';
-  updateNbJours();
-  renderMesConges(nom);
-  document.getElementById('c-date-debut').onchange = updateNbJours;
-  document.getElementById('c-date-fin').onchange = updateNbJours;
-  showScreen('screen-conge');
-}
-function updateNbJours() {
-  const d1=document.getElementById('c-date-debut').value;
-  const d2=document.getElementById('c-date-fin').value;
-  if(!d1||!d2){document.getElementById('c-nb-jours').textContent='';return;}
-  const date1=new Date(d1+'T12:00:00'),date2=new Date(d2+'T12:00:00');
-  if(date2<date1){document.getElementById('c-nb-jours').textContent='⚠️ La date de fin doit être après la date de début';return;}
-  let count=0; const cur=new Date(date1);
-  while(cur<=date2){if(cur.getDay()!==0&&cur.getDay()!==6)count++;cur.setDate(cur.getDate()+1);}
-  document.getElementById('c-nb-jours').textContent=`📅 ${count} jour${count>1?'s':''} ouvré${count>1?'s':''}`;
-}
-function saveConge() {
-  const nom=document.getElementById('c-topbar-name').textContent;
-  const dateDebut=document.getElementById('c-date-debut').value;
-  const dateFin=document.getElementById('c-date-fin').value;
-  const motif=document.getElementById('c-motif').value;
-  if(!dateDebut||!dateFin)return;
-  if(new Date(dateFin+'T12:00:00')<new Date(dateDebut+'T12:00:00'))return;
-  let jours=0; const cur=new Date(dateDebut+'T12:00:00'); const end=new Date(dateFin+'T12:00:00'); const dates=[];
-  while(cur<=end){if(cur.getDay()!==0&&cur.getDay()!==6){jours++;dates.push(cur.toISOString().split('T')[0]);}cur.setDate(cur.getDate()+1);}
-  const entry={nom,dateDebut,dateFin,motif,jours,dates,type:currentRole||'transport',timestamp:new Date().toISOString()};
-  dbCache.conges.push(entry);
-  if(window.__db) window.__db.collection('conges').add(Object.assign({},entry)).catch(e=>console.error(e));
-  document.getElementById('c-saved').style.display='flex';
-  setTimeout(()=>{document.getElementById('c-saved').style.display='none';},3000);
-  renderMesConges(nom);
-}
-function renderMesConges(nom) {
-  const y=new Date().getFullYear(),m=new Date().getMonth();
-  const entries=(dbCache.conges||[]).filter(e=>e.nom===nom&&e.dates&&e.dates.some(d=>{const dd=new Date(d+'T12:00:00');return dd.getFullYear()===y&&dd.getMonth()===m;}));
-  const container=document.getElementById('c-existing');
-  if(!entries.length){container.style.display='none';return;}
-  container.style.display='block';
-  const MF=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
-  document.getElementById('c-existing-list').innerHTML=entries.map(e=>{
-    const d1=new Date(e.dateDebut+'T12:00:00'),d2=new Date(e.dateFin+'T12:00:00');
-    const label=e.dateDebut===e.dateFin?`${d1.getDate()} ${MF[d1.getMonth()]}`:`${d1.getDate()} ${MF[d1.getMonth()]} → ${d2.getDate()} ${MF[d2.getMonth()]}`;
-    return `<div class="list-row"><div class="avatar" style="background:#fef3c7;color:#d97706;">🏖️</div>
-      <div class="list-info"><div class="list-name">${label}</div><div class="list-detail">${e.jours}j · ${e.motif||'Congés'}</div></div></div>`;
-  }).join('');
-}
-function renderCongesAdmin() {
-  const y=currentMonth.getFullYear(),m=currentMonth.getMonth();
-  const entries=(dbCache.conges||[]).filter(e=>e.dates&&e.dates.some(d=>{const dd=new Date(d+'T12:00:00');return dd.getFullYear()===y&&dd.getMonth()===m;}));
-  const byNom={};
-  entries.forEach(e=>{
-    if(!byNom[e.nom])byNom[e.nom]={jours:0,periodes:[]};
-    const j=e.dates.filter(d=>{const dd=new Date(d+'T12:00:00');return dd.getFullYear()===y&&dd.getMonth()===m;}).length;
-    byNom[e.nom].jours+=j;
-    byNom[e.nom].periodes.push({dateDebut:e.dateDebut,dateFin:e.dateFin,motif:e.motif,jours:j});
-  });
-  const total=Object.values(byNom).reduce((s,v)=>s+v.jours,0);
-  document.getElementById('g-c-total').textContent=total;
-  document.getElementById('g-c-salaries').textContent=Object.keys(byNom).length;
-  const MF=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
-  const allNames=[...TRANSPORT_NAMES,...DEPANNAGE_NAMES,...ATELIER_NAMES];
-  const sorted=allNames.filter(n=>byNom[n]);
-  const list=document.getElementById('g-c-list');
-  if(!sorted.length){list.innerHTML='<div style="text-align:center;color:var(--text-muted);padding:20px;font-size:14px;">Aucun congé ce mois-ci</div>';return;}
-  list.innerHTML=sorted.map(nom=>{
-    const e=byNom[nom];
-    const icon=TRANSPORT_NAMES.includes(nom)?'🚚':DEPANNAGE_NAMES.includes(nom)?'🔧':'🔨';
-    const periodes=e.periodes.map(p=>{
-      const d1=new Date(p.dateDebut+'T12:00:00'),d2=new Date(p.dateFin+'T12:00:00');
-      const label=p.dateDebut===p.dateFin?`${d1.getDate()} ${MF[d1.getMonth()]}`:`${d1.getDate()} ${MF[d1.getMonth()]} → ${d2.getDate()} ${MF[d2.getMonth()]}`;
-      return `<div style="font-size:12px;color:var(--text-muted);">📅 ${label} · ${p.jours}j${p.motif?' · '+p.motif:''}</div>`;
-    }).join('');
-    return `<div class="list-row">
-      <div class="avatar" style="background:#fef3c7;color:#d97706;">${nom.split(' ').map(w=>w[0]).join('').substring(0,2)}</div>
-      <div class="list-info"><div class="list-name">${icon} ${nom}</div>${periodes}</div>
-      <div class="list-right"><div class="list-hours" style="color:#d97706;">${e.jours}j</div><div class="list-sub">congés</div></div>
-    </div>`;
-  }).join('');
 }
 function initials(n) { return n.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase(); }
 
@@ -2245,46 +1997,7 @@ function imprimerFiche() {
       .fiche-badge{background:white;border:1.5px solid #e2e8f0;border-radius:6px;padding:6px 12px;font-size:12px;}
       .fiche-badge span{font-weight:700;font-size:14px;color:#064e3b;display:block;}
     </style>
-  </head><body>${html}
-<!-- ÉCRAN CONGÉS -->
-<div class="screen" id="screen-conge">
-  <div class="topbar" style="background:linear-gradient(135deg,#d97706,#f59e0b);">
-    <div>
-      <div class="topbar-title" id="c-topbar-name">Salarié</div>
-      <div class="topbar-sub" id="c-topbar-date">—</div>
-    </div>
-    <button class="topbar-btn" onclick="logout()">Déco.</button>
-  </div>
-  <div class="scroll-area">
-    <div class="section-title">🏖️ Déclarer des congés</div>
-    <div class="section-sub">Indiquez la période de vos congés</div>
-    <div class="card">
-      <div class="card-header">📅 Période de congés</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div><label style="font-size:12px;color:var(--text-muted);font-weight:600;">Du</label>
-          <input type="date" id="c-date-debut" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;"></div>
-        <div><label style="font-size:12px;color:var(--text-muted);font-weight:600;">Au</label>
-          <input type="date" id="c-date-fin" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;"></div>
-      </div>
-      <div id="c-nb-jours" style="margin-top:10px;text-align:center;font-size:13px;color:var(--text-muted);"></div>
-    </div>
-    <div class="card" style="background:#fef3c7;border-left:4px solid #f59e0b;">
-      <label style="font-size:13px;font-weight:600;color:#92400e;">💬 Motif (optionnel)</label>
-      <textarea id="c-motif" placeholder="Congés annuels, RTT…" rows="2" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;resize:none;margin-top:6px;"></textarea>
-    </div>
-    <div id="c-existing" style="display:none;">
-      <div class="card"><div class="card-header">📋 Mes congés ce mois-ci</div><div id="c-existing-list"></div></div>
-    </div>
-    <button class="btn-primary" onclick="saveConge()" style="margin:20px 0;background:linear-gradient(135deg,#d97706,#f59e0b);">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-      Enregistrer mes congés
-    </button>
-    <div class="alert alert-success" id="c-saved" style="display:none;">✅ Congés enregistrés !</div>
-  </div>
-</div>
-<!-- FIN ÉCRAN CONGÉS -->
-
-</body></html>`);
+  </head><body>${html}</body></html>`);
   win.document.close();
   win.focus();
   setTimeout(()=>win.print(), 300);
@@ -2319,46 +2032,7 @@ function imprimerToutesFiches() {
   win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8">
     <title>Toutes les fiches — ${moisLabel}</title>
     <style>${PRINT_CSS}</style>
-  </head><body>${pages}
-<!-- ÉCRAN CONGÉS -->
-<div class="screen" id="screen-conge">
-  <div class="topbar" style="background:linear-gradient(135deg,#d97706,#f59e0b);">
-    <div>
-      <div class="topbar-title" id="c-topbar-name">Salarié</div>
-      <div class="topbar-sub" id="c-topbar-date">—</div>
-    </div>
-    <button class="topbar-btn" onclick="logout()">Déco.</button>
-  </div>
-  <div class="scroll-area">
-    <div class="section-title">🏖️ Déclarer des congés</div>
-    <div class="section-sub">Indiquez la période de vos congés</div>
-    <div class="card">
-      <div class="card-header">📅 Période de congés</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div><label style="font-size:12px;color:var(--text-muted);font-weight:600;">Du</label>
-          <input type="date" id="c-date-debut" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;"></div>
-        <div><label style="font-size:12px;color:var(--text-muted);font-weight:600;">Au</label>
-          <input type="date" id="c-date-fin" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;"></div>
-      </div>
-      <div id="c-nb-jours" style="margin-top:10px;text-align:center;font-size:13px;color:var(--text-muted);"></div>
-    </div>
-    <div class="card" style="background:#fef3c7;border-left:4px solid #f59e0b;">
-      <label style="font-size:13px;font-weight:600;color:#92400e;">💬 Motif (optionnel)</label>
-      <textarea id="c-motif" placeholder="Congés annuels, RTT…" rows="2" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;resize:none;margin-top:6px;"></textarea>
-    </div>
-    <div id="c-existing" style="display:none;">
-      <div class="card"><div class="card-header">📋 Mes congés ce mois-ci</div><div id="c-existing-list"></div></div>
-    </div>
-    <button class="btn-primary" onclick="saveConge()" style="margin:20px 0;background:linear-gradient(135deg,#d97706,#f59e0b);">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-      Enregistrer mes congés
-    </button>
-    <div class="alert alert-success" id="c-saved" style="display:none;">✅ Congés enregistrés !</div>
-  </div>
-</div>
-<!-- FIN ÉCRAN CONGÉS -->
-
-</body></html>`);
+  </head><body>${pages}</body></html>`);
   win.document.close();
   win.focus();
   setTimeout(()=>win.print(), 400);
@@ -2427,66 +2101,115 @@ function saveA() {
 }
 
 // ═════════════════════════════════════════════════════════════════
+// BUREAU
+// ═════════════════════════════════════════════════════════════════
+function enterBureau(nom) {
+  const today = new Date();
+  document.getElementById('b-topbar-name').textContent = nom;
+  document.getElementById('b-date').value = today.toISOString().split('T')[0];
+  document.getElementById('b-topbar-date').textContent = today.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'});
+  document.getElementById('b-repos').checked = false;
+  document.getElementById('b-repos-alert').style.display = 'none';
+  document.getElementById('b-conge').checked = false;
+  document.getElementById('b-conge-alert').style.display = 'none';
+  document.getElementById('b-astreinte-nuit').checked = false;
+  document.getElementById('b-astreinte-nuit-alert').style.display = 'none';
+  document.getElementById('b-astreinte-we').checked = false;
+  document.getElementById('b-astreinte-we-alert').style.display = 'none';
+  document.getElementById('b-work-section').style.display = 'block';
+  updateBureauFields();
+  showScreen('screen-bureau');
 }
 
-// ════ ATELIER ════
-function enterAtelier(nom) {
-  const today = new Date();
-  histoMois.a = new Date();
-  document.getElementById('a-page-pointage').style.display='block';
-  document.getElementById('a-page-historique').style.display='none';
-  document.querySelectorAll('#screen-atelier .nav-item').forEach((b,i)=>b.classList.toggle('active',i===0));
-  document.getElementById('a-topbar-name').textContent=nom;
-  document.getElementById('a-date').value=today.toISOString().split('T')[0];
-  document.getElementById('a-topbar-date').textContent=today.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
-  document.getElementById('a-conge').checked=false;
-  document.getElementById('a-conge-alert').style.display='none';
-  document.getElementById('a-work-section').style.display='block';
-  showScreen('screen-atelier');
-  if(window.__db){
-    window.__db.collection('pointages_atelier').where('nom','==',nom).get()
-      .then(snap=>{
-        dbCache.atelier=(dbCache.atelier||[]).filter(e=>e.nom!==nom);
-        snap.forEach(d=>dbCache.atelier.push(d.data()));
-        const todayStr=today.toISOString().split('T')[0];
-        const ex=dbCache.atelier.find(e=>e.nom===nom&&e.date===todayStr);
-        if(ex) prefillAtelier(ex);
-      }).catch(()=>{});
+function updateBureauFields() {
+  const dateInput = document.getElementById('b-date');
+  if (!dateInput || !dateInput.value) return;
+  
+  const date = new Date(dateInput.value);
+  const jour = date.getDay();
+  
+  // Afficher Astreinte nuit seulement lun-ven
+  const nuitCard = document.getElementById('b-astreinte-nuit-card');
+  if (nuitCard) {
+    nuitCard.style.display = (jour >= 1 && jour <= 5) ? 'block' : 'none';
+    if (jour < 1 || jour > 5) {
+      document.getElementById('b-astreinte-nuit').checked = false;
+      document.getElementById('b-astreinte-nuit-alert').style.display = 'none';
+    }
+  }
+  
+  // Afficher Astreinte WE seulement sam-dim
+  const weCard = document.getElementById('b-astreinte-we-card');
+  if (weCard) {
+    weCard.style.display = (jour === 5 || jour === 6) ? 'block' : 'none';
+    if (jour !== 5 && jour !== 6) {
+      document.getElementById('b-astreinte-we').checked = false;
+      document.getElementById('b-astreinte-we-alert').style.display = 'none';
+    }
   }
 }
-function prefillAtelier(e) {
-  if(e.conge){
-    document.getElementById('a-conge').checked=true;
-    document.getElementById('a-conge-alert').style.display='block';
-    document.getElementById('a-work-section').style.display='none';
-  } else {
-    if(e.dep) document.getElementById('a-dep').value=e.dep;
-    if(e.pd)  document.getElementById('a-pd').value=e.pd;
-    if(e.pf)  document.getElementById('a-pf').value=e.pf;
-    if(e.fin) document.getElementById('a-fin').value=e.fin;
+
+function toggleReposB() {
+  const checked = document.getElementById('b-repos').checked;
+  document.getElementById('b-repos-alert').style.display = checked ? 'block' : 'none';
+  if (checked) {
+    document.getElementById('b-conge').checked = false;
+    document.getElementById('b-conge-alert').style.display = 'none';
+  }
+  document.getElementById('b-work-section').style.display = checked ? 'none' : 'block';
+}
+
+function toggleCongeB() {
+  const checked = document.getElementById('b-conge').checked;
+  document.getElementById('b-conge-alert').style.display = checked ? 'block' : 'none';
+  if (checked) {
+    document.getElementById('b-repos').checked = false;
+    document.getElementById('b-repos-alert').style.display = 'none';
   }
 }
-function toggleCongeA() {
-  const checked=document.getElementById('a-conge').checked;
-  document.getElementById('a-conge-alert').style.display=checked?'block':'none';
-  document.getElementById('a-work-section').style.display=checked?'none':'block';
+
+function toggleAstreinteNuit() {
+  const checked = document.getElementById('b-astreinte-nuit').checked;
+  document.getElementById('b-astreinte-nuit-alert').style.display = checked ? 'block' : 'none';
 }
-function saveA() {
-  const nom=document.getElementById('a-topbar-name').textContent;
-  const date=document.getElementById('a-date').value;
-  const conge=document.getElementById('a-conge').checked;
-  const dep=document.getElementById('a-dep').value;
-  const pd=document.getElementById('a-pd').value;
-  const pf=document.getElementById('a-pf').value;
-  const fin=document.getElementById('a-fin').value;
-  let minutes=0;
-  if(!conge&&dep&&pd&&pf&&fin){
-    const tm=t=>{const[h,m]=t.split(':').map(Number);return h*60+m;};
-    minutes=Math.max(0,(tm(pd)-tm(dep))+(tm(fin)-tm(pf)));
+
+function toggleAstreinteWE() {
+  const checked = document.getElementById('b-astreinte-we').checked;
+  document.getElementById('b-astreinte-we-alert').style.display = checked ? 'block' : 'none';
+}
+
+function saveB() {
+  const nom = document.getElementById('b-topbar-name').textContent;
+  const date = document.getElementById('b-date').value;
+  const repos = document.getElementById('b-repos').checked;
+  const conge = document.getElementById('b-conge').checked;
+  const astreinteNuit = document.getElementById('b-astreinte-nuit').checked;
+  const astreinteWE = document.getElementById('b-astreinte-we').checked;
+  const dep = document.getElementById('b-dep').value;
+  const pd = document.getElementById('b-pd').value;
+  const pf = document.getElementById('b-pf').value;
+  const fin = document.getElementById('b-fin').value;
+  
+  const data = {
+    nom: nom,
+    type: 'bureau',
+    date: date,
+    repos: repos,
+    conge: conge,
+    astreinteNuit: astreinteNuit,
+    astreinteWE: astreinteWE,
+    dep: dep,
+    pd: pd,
+    pf: pf,
+    fin: fin,
+    timestamp: new Date().toISOString()
+  };
+  
+  const savedEl = document.getElementById('b-saved');
+  if (savedEl) {
+    savedEl.style.display = 'flex';
+    setTimeout(() => { savedEl.style.display = 'none'; }, 3000);
   }
-  savePointage('atelier',{nom,type:'atelier',date,conge,dep,pd,pf,fin,minutes,timestamp:new Date().toISOString()});
-  const el=document.getElementById('a-saved');
-  el.style.display='flex'; setTimeout(()=>el.style.display='none',3000);
 }
 
 </script>
@@ -2583,23 +2306,39 @@ function saveA() {
     <button class="topbar-btn" onclick="logout()">Déco.</button>
   </div>
   <div class="scroll-area" id="a-scroll">
-    <div id="a-page-pointage">
+
     <div class="section-title">Mon pointage Atelier</div>
-    <div class="section-sub">Lun–Ven 8h–12h / 14h–17h30</div>
+    <div class="section-sub" id="a-ref-horaire">Lun–Ven 8h–12h / 14h–17h30</div>
+
     <div class="card">
-      <div class="card-header">📅 Date de travail</div>
-      <div class="field"><input type="date" id="a-date"></div>
-    </div>
-    <div class="card" style="background:#fef3c7;border-left:4px solid #f59e0b;">
-      <div class="toggle-row">
-        <label for="a-conge" style="font-size:15px;font-weight:600;">🏖️ En congé ce jour</label>
-        <label class="toggle"><input type="checkbox" id="a-conge" onchange="toggleCongeA()"><span class="toggle-slider"></span></label>
+      <div class="card-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+        Date de travail
       </div>
-      <div id="a-conge-alert" class="alert alert-warning" style="display:none;margin-top:10px;">🏖️ Journée en congé enregistrée</div>
+      <div class="field">
+        <input type="date" id="a-date">
+      </div>
     </div>
+
+    <div class="card" style="background: #fef3c7; border-left: 4px solid #f59e0b;">
+      <div class="toggle-row">
+        <label for="a-conge" style="font-size:15px; font-weight:600;">🏖️ En congé ce jour</label>
+        <label class="toggle">
+          <input type="checkbox" id="a-conge" onchange="toggleCongeA()">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div id="a-conge-alert" class="alert alert-warning" style="display:none; margin-top:10px;">
+        🏖️ Journée en congé enregistrée
+      </div>
+    </div>
+
     <div id="a-work-section">
     <div class="card">
-      <div class="card-header">⏱️ Mes horaires</div>
+      <div class="card-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8l5 3-5 3V8z"/></svg>
+        Horaires
+      </div>
       <div class="time-grid">
         <div class="time-cell"><div class="time-cell-label">🟢 Départ</div><input type="time" id="a-dep" value="08:00"></div>
         <div class="time-cell"><div class="time-cell-label">☕ Début pause</div><input type="time" id="a-pd" value="12:00"></div>
@@ -2608,88 +2347,119 @@ function saveA() {
       </div>
     </div>
     </div>
-    <button class="btn-primary" onclick="saveA()" style="margin:20px 0;background:linear-gradient(135deg,#8b5cf6,#a855f7);">
+
+    <button class="btn-primary" onclick="saveA()" style="margin:20px 0; background: linear-gradient(135deg, #8b5cf6, #a855f7);">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
       Enregistrer ma journée
     </button>
-    <div class="alert alert-success" id="a-saved" style="display:none;">✅ Journée enregistrée !</div>
-    </div><!-- /a-page-pointage -->
 
-    <!-- PAGE HISTORIQUE ATELIER -->
-    <div id="a-page-historique" style="display:none;">
-      <div class="section-title">Mon historique</div>
-      <div class="section-sub">Récapitulatif de mes temps de travail</div>
-      <div class="month-nav" style="margin-bottom:12px;">
-        <button class="month-nav-btn" onclick="changeHistoMois('a',-1)">‹</button>
-        <span id="a-histo-month-label" style="font-weight:600;font-size:15px;"></span>
-        <button class="month-nav-btn" onclick="changeHistoMois('a',1)">›</button>
-      </div>
-      <div class="stat-grid">
-        <div class="stat-card" style="background:#8b5cf6;"><div class="stat-val" id="a-histo-jours">—</div><div class="stat-lbl">Jours travaillés</div></div>
-        <div class="stat-card accent"><div class="stat-val" id="a-histo-heures">—</div><div class="stat-lbl">Heures totales</div></div>
-        <div class="stat-card" style="background:#d97706;"><div class="stat-val" id="a-histo-conges">—</div><div class="stat-lbl">Jours congés</div></div>
-        <div class="stat-card"><div class="stat-val" id="a-histo-supp">—</div><div class="stat-lbl">Heures supp.</div></div>
-      </div>
-      <div class="card"><div class="card-header">📋 Détail jour par jour</div><div id="a-histo-list"></div></div>
-    </div>
-  </div>
-  <div class="bottom-nav" style="border-top-color:#c4b5fd;">
-    <button class="nav-item active" style="color:#8b5cf6;" onclick="aNav('pointage',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      <span>Pointage</span>
-    </button>
-    <button class="nav-item" onclick="aNav('historique',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-      <span>Historique</span>
-    </button>
-    <button class="nav-item" onclick="enterConge(currentUser)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span>Congés</span>
-    </button>
+    <div class="alert alert-success" id="a-saved" style="display:none;">✅ Journée enregistrée !</div>
+
   </div>
 </div>
 <!-- FIN ATELIER SCREEN -->
 
-
-
-
-<!-- ÉCRAN CONGÉS -->
-<div class="screen" id="screen-conge">
-  <div class="topbar" style="background:linear-gradient(135deg,#d97706,#f59e0b);">
+<!-- BUREAU SCREEN -->
+<div class="screen" id="screen-bureau">
+  <div class="topbar" style="background: linear-gradient(135deg, #0369a1, #0284c7);">
     <div>
-      <div class="topbar-title" id="c-topbar-name">Salarié</div>
-      <div class="topbar-sub" id="c-topbar-date">—</div>
+      <div class="topbar-title" id="b-topbar-name">Employé Bureau</div>
+      <div class="topbar-sub" id="b-topbar-date">—</div>
     </div>
     <button class="topbar-btn" onclick="logout()">Déco.</button>
   </div>
-  <div class="scroll-area">
-    <div class="section-title">🏖️ Déclarer des congés</div>
-    <div class="section-sub">Indiquez la période de vos congés</div>
+  <div class="scroll-area" id="b-scroll">
+
+    <div class="section-title">Mon pointage Bureau</div>
+    <div class="section-sub" id="b-ref-horaire">Lun–Jeu 7h30–12h / 13h30–18h | Ven 8h–12h</div>
+
     <div class="card">
-      <div class="card-header">📅 Période de congés</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div><label style="font-size:12px;color:var(--text-muted);font-weight:600;">Du</label>
-          <input type="date" id="c-date-debut" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;"></div>
-        <div><label style="font-size:12px;color:var(--text-muted);font-weight:600;">Au</label>
-          <input type="date" id="c-date-fin" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;"></div>
+      <div class="card-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+        Date de travail
       </div>
-      <div id="c-nb-jours" style="margin-top:10px;text-align:center;font-size:13px;color:var(--text-muted);"></div>
+      <div class="field">
+        <input type="date" id="b-date" onchange="updateBureauFields()">
+      </div>
     </div>
-    <div class="card" style="background:#fef3c7;border-left:4px solid #f59e0b;">
-      <label style="font-size:13px;font-weight:600;color:#92400e;">💬 Motif (optionnel)</label>
-      <textarea id="c-motif" placeholder="Congés annuels, RTT…" rows="2" style="width:100%;padding:10px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;resize:none;margin-top:6px;"></textarea>
+
+    <div class="card" style="border:1.5px solid var(--accent);">
+      <div class="toggle-row">
+        <label for="b-repos" style="font-size:15px; font-weight:600;">🛌 Jour de repos</label>
+        <label class="toggle">
+          <input type="checkbox" id="b-repos" onchange="toggleReposB()">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div id="b-repos-alert" class="alert alert-info" style="display:none; margin-top:10px;">
+        🛌 Journée de repos enregistrée
+      </div>
     </div>
-    <div id="c-existing" style="display:none;">
-      <div class="card"><div class="card-header">📋 Mes congés ce mois-ci</div><div id="c-existing-list"></div></div>
+
+    <div class="card" style="background: #fef3c7; border-left: 4px solid #f59e0b;">
+      <div class="toggle-row">
+        <label for="b-conge" style="font-size:15px; font-weight:600;">🏖️ En congé ce jour</label>
+        <label class="toggle">
+          <input type="checkbox" id="b-conge" onchange="toggleCongeB()">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div id="b-conge-alert" class="alert alert-warning" style="display:none; margin-top:10px;">
+        🏖️ Journée en congé enregistrée
+      </div>
     </div>
-    <button class="btn-primary" onclick="saveConge()" style="margin:20px 0;background:linear-gradient(135deg,#d97706,#f59e0b);">
+
+    <div class="card" style="background: #dbeafe; border-left: 4px solid #0369a1;" id="b-astreinte-nuit-card">
+      <div class="toggle-row">
+        <label for="b-astreinte-nuit" style="font-size:15px; font-weight:600;">☎️ Astreinte de nuit</label>
+        <label class="toggle">
+          <input type="checkbox" id="b-astreinte-nuit" onchange="toggleAstreinteNuit()">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div id="b-astreinte-nuit-alert" class="alert alert-info" style="display:none; margin-top:10px;">
+        ☎️ Astreinte de nuit enregistrée
+      </div>
+    </div>
+
+    <div class="card" style="background: #f3e8ff; border-left: 4px solid #7c3aed;" id="b-astreinte-we-card" style="display:none;">
+      <div class="toggle-row">
+        <label for="b-astreinte-we" style="font-size:15px; font-weight:600;">📞 Week-end astreinte</label>
+        <label class="toggle">
+          <input type="checkbox" id="b-astreinte-we" onchange="toggleAstreinteWE()">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div id="b-astreinte-we-alert" class="alert alert-info" style="display:none; margin-top:10px;">
+        📞 Week-end astreinte enregistré
+      </div>
+    </div>
+
+    <div id="b-work-section">
+    <div class="card">
+      <div class="card-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8l5 3-5 3V8z"/></svg>
+        Horaires
+      </div>
+      <div class="time-grid">
+        <div class="time-cell"><div class="time-cell-label">🟢 Départ</div><input type="time" id="b-dep" value="07:30"></div>
+        <div class="time-cell"><div class="time-cell-label">☕ Début pause</div><input type="time" id="b-pd" value="12:00"></div>
+        <div class="time-cell"><div class="time-cell-label">▶️ Fin pause</div><input type="time" id="b-pf" value="13:30"></div>
+        <div class="time-cell"><div class="time-cell-label">🔴 Fin journée</div><input type="time" id="b-fin" value="18:00"></div>
+      </div>
+    </div>
+    </div>
+
+    <button class="btn-primary" onclick="saveB()" style="margin:20px 0; background: linear-gradient(135deg, #0369a1, #0284c7);">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-      Enregistrer mes congés
+      Enregistrer ma journée
     </button>
-    <div class="alert alert-success" id="c-saved" style="display:none;">✅ Congés enregistrés !</div>
+
+    <div class="alert alert-success" id="b-saved" style="display:none;">✅ Journée enregistrée !</div>
+
   </div>
 </div>
-<!-- FIN ÉCRAN CONGÉS -->
+<!-- FIN BUREAU SCREEN -->
 
 </body>
 </html>
