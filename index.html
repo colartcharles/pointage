@@ -973,13 +973,14 @@ function reloadGestionnaire(){
   const loading=document.getElementById('g-loading');
   if(loading)loading.style.display='flex';
   if(!window.__db){renderGLists();if(loading)loading.style.display='none';return;}
+  const safeGet = (ref) => ref.get().catch(() => ({docs:[]}));
   Promise.all([
-    window.__db.collection('pointages_transport').get(),
-    window.__db.collection('pointages_depannage').get(),
-    window.__db.collection('pointages_atelier').get(),
-    window.__db.collection('conges').get(),
-    window.__db.collection('config').doc('horaires').get(),
-    window.__db.collection('config').doc('salaries').get()
+    safeGet(window.__db.collection('pointages_transport')),
+    safeGet(window.__db.collection('pointages_depannage')),
+    safeGet(window.__db.collection('pointages_atelier')),
+    safeGet(window.__db.collection('conges')),
+    window.__db.collection('config').doc('horaires').get().catch(()=>({exists:false})),
+    window.__db.collection('config').doc('salaries').get().catch(()=>({exists:false}))
   ]).then(([tS,dS,aS,cS,hDoc,salDoc])=>{
     dbCache.transport=tS.docs.map(d=>d.data());
     dbCache.depannage=dS.docs.map(d=>d.data());
@@ -2684,10 +2685,10 @@ function saveA() {
   };
   firebase.initializeApp(firebaseConfig);
   window.__db = firebase.firestore();
-  // Charger la config salariés au démarrage pour mettre à jour la liste de connexion
+  // Charger la config salariés au démarrage
   window.__db.collection('config').doc('salaries').get()
     .then(doc=>{ if(doc.exists) applyEmployeConfig(doc.data()); })
-    .catch(e=>console.error('Init salaries:', e));
+    .catch(e=>{ console.warn('Config salaries non disponible:', e.message); });
 </script>
 
 <!-- ATELIER SCREEN -->
